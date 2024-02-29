@@ -1,0 +1,139 @@
+psql --username=freecodecamp --dbname=postgres
+create database universe;
+\c universe;
+
+create table galaxy (
+    galaxy_id serial,
+    name varchar(30) unique,
+    col_int1 int not null,
+    col_int2 int not null,
+    col_numeric numeric,
+    col_text text,
+    col_boolean1 boolean,
+    col_boolean2 boolean,
+    primary key (galaxy_id)
+);
+
+
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('andromena', 1,2, 123, 'first', True, False);
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('andromeno', 1,2, 123, 'second', True, False);
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('andromene', 1,2, 123, 'third', True, False);
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('andromen', 1,2, 123, 'forth', True, False);
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('androme', 1,2, 123, 'fifth', True, False);
+insert into galaxy (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('androm', 1,2, 123, 'sixth', True, False);
+
+create table star (
+    star_id serial,
+    galaxy_id int,
+    name varchar(30) unique,
+    col_int1 int not null,
+    col_int2 int not null,
+    col_numeric numeric,
+    col_text text,
+    col_boolean1 boolean,
+    col_boolean2 boolean,
+    primary key (star_id),
+    constraint fk_galaxy_id FOREIGN KEY(galaxy_id) 
+        REFERENCES galaxy(galaxy_id)
+    
+);
+
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'a', 1,2,123,'first', True, False);
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'b', 1,2,123,'second', True, False);
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'c', 1,2,123,'third', True, False);
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'd', 1,2,123,'forth', True, False);
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'e', 1,2,123,'fifth', True, False);
+insert into star (galaxy_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'f', 1,2,123,'sixth', True, False);
+
+create table planet (
+    planet_id serial,
+    star_id int,
+    name varchar(30) unique,
+    col_int1 int not null,
+    col_int2 int not null,
+    col_numeric numeric,
+    col_text text,
+    col_boolean1 boolean,
+    col_boolean2 boolean,
+    primary key (planet_id),
+    constraint fk_star_id FOREIGN KEY(star_id) 
+        REFERENCES star(star_id)
+);
+
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'a', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'b', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'aa', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'bb', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'cc', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'dd', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'ee', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'ff', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'ii', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'jj', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'kk', 1,2,123,'first', True, False);
+insert into planet (star_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (2, 'll', 1,2,123,'first', True, False);
+
+create table moon (
+    moon_id serial,
+    planet_id int,
+    name varchar(30) unique,
+    col_int1 int  not null,
+    col_int2 int  not null,
+    col_numeric numeric,
+    col_text text,
+    col_boolean1 boolean,
+    col_boolean2 boolean,
+    primary key (moon_id),
+    constraint fk_planet_id FOREIGN KEY(planet_id) 
+        REFERENCES planet(planet_id)
+);
+
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'a', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'aa', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ab', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ac', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ad', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ae', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'af', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ag', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ah', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ai', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'aj', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ak', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'al', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'am', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'an', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ao', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ap', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'aq', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ar', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'as', 1, 2, 123, 'A', True, False);
+insert into moon (planet_id, name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values (1, 'ax', 1, 2, 123, 'A', True, False);
+
+create table extra (
+    extra_id serial,
+    name varchar(30) unique,
+    col_int1 int not null,
+    col_int2 int not null,
+    col_numeric numeric,
+    col_text text,
+    col_boolean1 boolean,
+    col_boolean2 boolean,
+    primary key (extra_id)
+);
+
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('ab', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('b', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('c', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('d', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('e', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('f', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('g', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('h', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('j', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('l', 1,2,123,'ASD', True, False);
+insert into extra (name, col_int1, col_int2, col_numeric, col_text, col_boolean1, col_boolean2) values ('k', 1,2,123,'ASD', True, False);
+
+exit;
+
+pg_dump -cC --inserts -U freecodecamp universe > universe.sql
